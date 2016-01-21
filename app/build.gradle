@@ -29,4 +29,5 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.loopj.android:android-async-http:1.4.9'
 
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
