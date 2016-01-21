@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.lesehome.carrot.loadingview.impl.CarrotLoadingMoreView;
+import com.lesehome.carrot.loadingview.impl.CarrotLoadingView;
 import com.lesehome.sample.widget.PtrHeader;
 import com.lesehome.carrot.loadingview.LoadingViewHelper;
 import com.lesehome.carrot.loadingview.helper.LoadingViewUltraHelper;
@@ -50,7 +52,7 @@ public class MovieDetailActivity extends Activity implements IAdapterItem.OnItem
 
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        listViewHelper = new LoadingViewUltraHelper<>(contentLayout);
+        listViewHelper = new LoadingViewUltraHelper<>(contentLayout,new CarrotLoadingView(),new CarrotLoadingMoreView());
 
         // 设置数据源
         listViewHelper.setDataSource(new MovieDetailDataSource());

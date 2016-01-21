@@ -1,17 +1,21 @@
 package com.lesehome.carrot.loadingview.impl;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lesehome.carrot.loadingview.ILoadViewFactory;
 import com.lesehome.carrot.loadingview.helper.VaryViewHelper;
-import com.lesehome.sample.R;
 
-public class DefaultLoadViewFactory implements ILoadViewFactory {
+public class DefaultLoadingViewFactory implements ILoadViewFactory {
 
     @Override
     public ILoadMoreView madeLoadMoreView() {
@@ -31,7 +35,16 @@ public class DefaultLoadViewFactory implements ILoadViewFactory {
 
         @Override
         public void init(FootViewAdder footViewHolder, OnClickListener onClickRefreshListener) {
-            footView = (TextView) footViewHolder.addFootView(R.layout.carrot_mvc_layout_listview_foot);
+            View contentView = footViewHolder.getContentView();
+
+            Context context = contentView.getContext();
+            TextView textView = new TextView(context);
+            textView.setTextColor(Color.GRAY);
+            textView.setPadding(0, dip2px(context, 16), 0, dip2px(context, 16));
+            textView.setGravity(Gravity.CENTER);
+            footViewHolder.addFootView(textView);
+
+            footView = textView;
             this.onClickRefreshListener = onClickRefreshListener;
             showNormal();
         }
@@ -81,9 +94,23 @@ public class DefaultLoadViewFactory implements ILoadViewFactory {
 
         @Override
         public void showLoading() {
-            View layout = helper.inflate(R.layout.carrot_mvc_load_ing);
-            TextView textView = (TextView) layout.findViewById(R.id.textView1);
+            Context context = helper.getContext();
+
+            LinearLayout layout = new LinearLayout(context);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.setGravity(Gravity.CENTER);
+
+            ProgressBar progressBar = new ProgressBar(context);
+            layout.addView(progressBar);
+
+            TextView textView = new TextView(context);
             textView.setText("加载中...");
+            textView.setGravity(Gravity.CENTER);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            int top = dip2px(context, 12);
+            params.setMargins(0, top, 0, 0);
+            layout.addView(textView, params);
+
             helper.showLayout(layout);
         }
 
@@ -94,25 +121,59 @@ public class DefaultLoadViewFactory implements ILoadViewFactory {
 
         @Override
         public void showFail(Exception exception) {
-            View layout = helper.inflate(R.layout.carrot_mvc_load_error);
-            TextView textView = (TextView) layout.findViewById(R.id.textView1);
+            Context context = helper.getContext();
+
+            LinearLayout layout = new LinearLayout(context);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.setGravity(Gravity.CENTER);
+
+            TextView textView = new TextView(context);
             textView.setText("网络加载失败");
-            Button button = (Button) layout.findViewById(R.id.button1);
+            textView.setGravity(Gravity.CENTER);
+            layout.addView(textView);
+
+            Button button = new Button(context);
             button.setText("重试");
             button.setOnClickListener(onClickRefreshListener);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            int top = dip2px(context, 12);
+            params.setMargins(0, top, 0, 0);
+            layout.addView(button, params);
+
             helper.showLayout(layout);
         }
 
         @Override
         public void showEmpty() {
-            View layout = helper.inflate(R.layout.carrot_mvc_load_empty);
-            TextView textView = (TextView) layout.findViewById(R.id.textView1);
+            Context context = helper.getContext();
+
+            LinearLayout layout = new LinearLayout(context);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.setGravity(Gravity.CENTER);
+
+            TextView textView = new TextView(context);
             textView.setText("暂无数据");
-            Button button = (Button) layout.findViewById(R.id.button1);
+            textView.setGravity(Gravity.CENTER);
+            layout.addView(textView);
+
+            Button button = new Button(context);
             button.setText("重试");
             button.setOnClickListener(onClickRefreshListener);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            int top = dip2px(context, 12);
+            params.setMargins(0, top, 0, 0);
+            layout.addView(button, params);
+
             helper.showLayout(layout);
         }
 
+    }
+
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }

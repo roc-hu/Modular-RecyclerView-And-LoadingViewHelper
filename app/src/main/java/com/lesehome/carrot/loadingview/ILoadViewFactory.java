@@ -20,7 +20,6 @@ public interface ILoadViewFactory {
         /**
          * 初始化
          *
-         * @param switchView
          * @param onClickRefreshListener ，刷新的点击事件，需要点击刷新的按钮都可以设置这个监听
          */
         void init(View switchView, OnClickListener onClickRefreshListener);
@@ -58,13 +57,13 @@ public interface ILoadViewFactory {
 
     /**
      * ListView底部加载更多的布局切换
+     *
      */
     interface ILoadMoreView {
 
         /**
          * 初始化
          *
-         * @param footViewHolder
          * @param onClickLoadMoreListener 加载更多的点击事件，需要点击调用加载更多的按钮都可以设置这个监听
          */
         void init(FootViewAdder footViewHolder, OnClickListener onClickLoadMoreListener);
@@ -98,6 +97,8 @@ public interface ILoadViewFactory {
         View addFootView(View view);
 
         View addFootView(int layoutId);
+
+        View getContentView();
 
     }
 

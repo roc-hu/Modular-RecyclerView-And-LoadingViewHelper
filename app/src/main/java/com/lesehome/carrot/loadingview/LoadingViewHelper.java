@@ -13,7 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.ListView;
 
 import com.lesehome.carrot.loadingview.viewHander.RecyclerViewHandler;
-import com.lesehome.carrot.loadingview.impl.DefaultLoadViewFactory;
+import com.lesehome.carrot.loadingview.impl.DefaultLoadingViewFactory;
 import com.lesehome.carrot.loadingview.viewHander.ListViewHandler;
 
 /**
@@ -49,7 +49,7 @@ public class LoadingViewHelper<DATA> {
     private boolean needCheckNetwork = true;
     private ILoadViewFactory.ILoadView mLoadView;
     private ILoadViewFactory.ILoadMoreView mLoadMoreView;
-    public static ILoadViewFactory loadViewFactory = new DefaultLoadViewFactory();
+    public static ILoadViewFactory loadViewFactory = new DefaultLoadingViewFactory();
 
     private ListViewHandler listViewHandler = new ListViewHandler();
 
