@@ -12,7 +12,6 @@ import com.lesehome.carrot.loadingview.LoadingViewHelper;
 import com.lesehome.carrot.loadingview.helper.LoadIngViewSwipeRefreshHelper;
 import com.lesehome.sample.module_mvc.adapter.TextViewAdapter;
 import com.lesehome.sample.R;
-import com.lesehome.sample.module_mvc.model.StringsAsyncDataSource;
 import com.lesehome.sample.module_mvc.model.StringsVolleyDataSource;
 
 /**
@@ -35,8 +34,7 @@ public class SwipeRefreshActivity extends Activity {
 
         // 设置数据源
 //        mvcHelper.setDataSource(new StringsDataSource());
-//        mvcHelper.setDataSource(new StringsVolleyDataSource());
-        mvcHelper.setDataSource(new StringsAsyncDataSource());
+        mvcHelper.setDataSource(new StringsVolleyDataSource());
         // 设置适配器
         mvcHelper.setAdapter(new TextViewAdapter(this));
 
