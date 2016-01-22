@@ -37,6 +37,7 @@
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
         <activity android:name=".MainActivity" />
         <activity android:name=".module_mvc.controller.UltraRecyclerViewStaggeredActivity" />
         <activity android:name=".module_mvc.controller.SwipeRefreshActivity" />
@@ -52,11 +53,7 @@
         <activity android:name=".module_mvc.controller.NormalActivity" />
         <activity android:name=".module_mvc.controller.NormalWithRefreshActivity" />
 
-        <activity android:name=".module_sticky.StickyheadersActivity" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <activity android:name=".module_sticky.StickyheadersActivity" />
     </application>
 
 </manifest>

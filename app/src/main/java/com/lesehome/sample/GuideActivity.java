@@ -35,13 +35,10 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
         setContentView(R.layout.activity_guide);
 
         // 初始化页面
-        initViews();
-
-        // 初始化底部小点
-        initDots();
+        initView();
     }
 
-    private void initViews() {
+    private void initView() {
         LayoutInflater inflater = LayoutInflater.from(this);
 
         views = new ArrayList<View>();
@@ -58,6 +55,8 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
         vp.setAdapter(vpAdapter);
         // 绑定回调
         vp.setOnPageChangeListener(this);
+        // 初始化底部小点
+        initDots();
     }
 
     private void initDots() {
