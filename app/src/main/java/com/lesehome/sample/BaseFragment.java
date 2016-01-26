@@ -3,10 +3,19 @@ package com.lesehome.sample;
 import android.app.Fragment;
 import android.view.View;
 
+import com.squareup.leakcanary.RefWatcher;
+
 /**
  * Created by hcp on 16/1/18.
  */
 public class BaseFragment extends Fragment implements View.OnClickListener {
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        RefWatcher refWatcher = BaseApp.getRefWatcher();
+        refWatcher.watch(this);
+    }
 
     /**
      * 查找页面view

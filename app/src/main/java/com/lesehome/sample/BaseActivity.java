@@ -4,13 +4,22 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.squareup.leakcanary.RefWatcher;
+
 /**
  * Created by hcp on 16/1/18.
  */
-public class BaseActivity extends Activity implements View.OnClickListener{
+public class BaseActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = BaseApp.getRefWatcher();
+        refWatcher.watch(this);
     }
 
     /**

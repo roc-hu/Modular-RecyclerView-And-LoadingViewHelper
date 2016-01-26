@@ -29,8 +29,8 @@ public class SwipeRefreshActivity extends Activity {
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         mvcHelper = new LoadIngViewSwipeRefreshHelper<>(swipeRefreshLayout);
 
-//        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-//		recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         // 设置数据源
 //        mvcHelper.setDataSource(new StringsDataSource());
