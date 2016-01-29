@@ -32,7 +32,7 @@ public class LoadIngViewSwipeRefreshHelper<DATA> extends LoadingViewHelper<DATA>
 		public RefreshView(SwipeRefreshLayout swipeRefreshLayout) {
 			this.swipeRefreshLayout = swipeRefreshLayout;
 			if (swipeRefreshLayout.getParent() == null) {
-				throw new RuntimeException("PtrClassicFrameLayout 必须有Parent");
+				throw new RuntimeException("SwipeRefreshLayout 必须有Parent");
 			}
 			try {
 				Method method = swipeRefreshLayout.getClass().getDeclaredMethod("ensureTarget");
