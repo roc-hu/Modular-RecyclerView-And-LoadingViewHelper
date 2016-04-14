@@ -16,23 +16,22 @@ import com.lesehome.carrot.loadingview.LoadingViewHelper.OnScrollBottomListener;
 import com.lesehome.carrot.loadingview.IDataAdapter;
 import com.lesehome.carrot.loadingview.IViewHandler;
 
-public class ListViewHandler implements IViewHandler {
+public class ListViewHandler implements IViewHandler<ListView> {
 
     @Override
-    public boolean handleSetAdapter(View contentView, IDataAdapter<?> adapter, ILoadMoreView loadMoreView, OnClickListener onClickLoadMoreListener) {
-        final ListView listView = (ListView) contentView;
+    public boolean handleSetAdapter(ListView contentView, IDataAdapter<?> adapter,
+                                    ILoadMoreView loadMoreView, OnClickListener onClickLoadMoreListener) {
         boolean hasInit = false;
         if (loadMoreView != null) {
-            loadMoreView.init(new ListViewFootViewAdder(listView), onClickLoadMoreListener);
+            loadMoreView.init(new ListViewFootViewAdder(contentView), onClickLoadMoreListener);
             hasInit = true;
         }
-        listView.setAdapter((ListAdapter) adapter);
+        contentView.setAdapter((ListAdapter) adapter);
         return hasInit;
     }
 
     @Override
-    public void setOnScrollBottomListener(View contentView, OnScrollBottomListener onScrollBottomListener) {
-        ListView listView = (ListView) contentView;
+    public void setOnScrollBottomListener(ListView listView, OnScrollBottomListener onScrollBottomListener) {
         listView.setOnScrollListener(new ListViewOnScrollListener(onScrollBottomListener));
         listView.setOnItemSelectedListener(new ListViewOnItemSelectedListener(onScrollBottomListener));
     }

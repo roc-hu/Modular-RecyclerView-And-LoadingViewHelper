@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
+import com.lesehome.carrot.db.DbUtil;
 import com.lesehome.carrot.recycler.modularadapter.IAdapterItem;
+import com.lesehome.greendao.bean.Note;
 import com.lesehome.sample.adapter.MainAdapter;
 import com.lesehome.sample.module_list.GridActivity;
 import com.lesehome.sample.module_list.LinearActivity;
@@ -23,6 +26,7 @@ import com.lesehome.sample.module_mvc.controller.SwipeRefreshActivity;
 import com.lesehome.sample.module_mvc.controller.UltraRecyclerViewActivity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends Activity implements IAdapterItem.OnItemClickListener {
@@ -84,6 +88,14 @@ public class MainActivity extends Activity implements IAdapterItem.OnItemClickLi
                 startActivity(new Intent(this, StickyheadersActivity.class));
                 break;
             case 11://
+                Note note = new Note();
+                note.setComment("Comment");
+                note.setDate(new Date());
+                note.setText("测试时间:"+new Date());
+                DbUtil.getNoteService().save(note);
+
+                List<Note> notes = DbUtil.getNoteService().queryAll();
+                Toast.makeText(this, "Notes:"+notes.size(), Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
@@ -106,6 +118,8 @@ public class MainActivity extends Activity implements IAdapterItem.OnItemClickLi
 
         items.add("复杂列表布局，MovieList");
         items.add("Stickyheaders");
+
+        items.add("GreenDao Test");
 
         return items;
     }

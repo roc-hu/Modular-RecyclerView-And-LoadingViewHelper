@@ -12,14 +12,11 @@ import com.lesehome.carrot.loadingview.ILoadViewFactory.ILoadMoreView;
 import com.lesehome.carrot.loadingview.LoadingViewHelper.OnScrollBottomListener;
 import com.lesehome.carrot.loadingview.IDataAdapter;
 import com.lesehome.carrot.loadingview.IViewHandler;
-import com.lesehome.carrot.loadingview.impl.LVAdapter;
-import com.lesehome.carrot.loadingview.impl.LVRecyclerAdapter;
 
-public class RecyclerViewHandler implements IViewHandler {
+public class RecyclerViewHandler implements IViewHandler<RecyclerView> {
 
     @Override
-    public boolean handleSetAdapter(View contentView, IDataAdapter<?> adapter, ILoadMoreView loadMoreView, OnClickListener onClickLoadMoreListener) {
-        final RecyclerView recyclerView = (RecyclerView) contentView;
+    public boolean handleSetAdapter(RecyclerView contentView, IDataAdapter<?> adapter, ILoadMoreView loadMoreView, OnClickListener onClickLoadMoreListener) {
         boolean hasInit = false;
         Adapter<?> adapter2 = (Adapter<?>) adapter;
         if (loadMoreView != null) {
@@ -30,17 +27,16 @@ public class RecyclerViewHandler implements IViewHandler {
                 hfAdapter = new LVRecyclerAdapter(adapter2);
             }
             adapter2 = hfAdapter;
-            loadMoreView.init(new RecyclerViewFootViewAdder(recyclerView, hfAdapter), onClickLoadMoreListener);
+            loadMoreView.init(new RecyclerViewFootViewAdder(contentView, hfAdapter), onClickLoadMoreListener);
             hasInit = true;
         }
-        recyclerView.setAdapter(adapter2);
+        contentView.setAdapter(adapter2);
         return hasInit;
     }
 
     @Override
-    public void setOnScrollBottomListener(View contentView, OnScrollBottomListener onScrollBottomListener) {
-        final RecyclerView recyclerView = (RecyclerView) contentView;
-        recyclerView.addOnScrollListener(new RecyclerViewOnScrollListener(onScrollBottomListener));
+    public void setOnScrollBottomListener(RecyclerView contentView, OnScrollBottomListener onScrollBottomListener) {
+        contentView.addOnScrollListener(new RecyclerViewOnScrollListener(onScrollBottomListener));
     }
 
     /**

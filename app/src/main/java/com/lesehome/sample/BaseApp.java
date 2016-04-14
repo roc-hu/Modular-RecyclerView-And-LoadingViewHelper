@@ -1,5 +1,6 @@
 package com.lesehome.sample;
 
+import com.lesehome.carrot.db.MyDb;
 import com.lesehome.sample.utils.MyVolley;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -25,6 +26,10 @@ public class BaseApp extends Application {
         _instance = (BaseApp) getApplicationContext();
 
         MyVolley.init(getApplicationContext());
+
+        MyDb.init(getApplicationContext());
+        MyDb.enableQueryBuilderLog();
+
         _refWatcher = LeakCanary.install(this);
     }
 

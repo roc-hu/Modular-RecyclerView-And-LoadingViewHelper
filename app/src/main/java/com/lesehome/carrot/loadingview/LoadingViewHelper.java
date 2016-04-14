@@ -25,8 +25,9 @@ import com.lesehome.carrot.loadingview.viewHander.ListViewHandler;
  * <br>
  * 注意:记得在Activity的Ondestroy方法调用destory <br>
  * 要添加 android.permission.ACCESS_NETWORK_STATE 权限，这个用来检测是否有网络
- *
+ * <p/>
  * 引用：https://github.com/LuckyJayce/MVCHelper
+ *
  * @param <DATA>
  */
 public class LoadingViewHelper<DATA> {
@@ -126,11 +127,13 @@ public class LoadingViewHelper<DATA> {
         View view = getContentView();
         hasInitLoadMoreView = false;
         if (view instanceof ListView) {
-            hasInitLoadMoreView = listViewHandler.handleSetAdapter(view, adapter, mLoadMoreView, onClickLoadMoreListener);
-            listViewHandler.setOnScrollBottomListener(view, onScrollBottomListener);
+            hasInitLoadMoreView = listViewHandler.handleSetAdapter((ListView) view, adapter,
+                    mLoadMoreView, onClickLoadMoreListener);
+            listViewHandler.setOnScrollBottomListener((ListView) view, onScrollBottomListener);
         } else if (view instanceof RecyclerView) {
-            hasInitLoadMoreView = recyclerViewHandler.handleSetAdapter(view, adapter, mLoadMoreView, onClickLoadMoreListener);
-            recyclerViewHandler.setOnScrollBottomListener(view, onScrollBottomListener);
+            hasInitLoadMoreView = recyclerViewHandler.handleSetAdapter((RecyclerView) view, adapter,
+                    mLoadMoreView, onClickLoadMoreListener);
+            recyclerViewHandler.setOnScrollBottomListener((RecyclerView) view, onScrollBottomListener);
         }
         this.dataAdapter = adapter;
     }
@@ -769,7 +772,6 @@ public class LoadingViewHelper<DATA> {
     public interface OnScrollBottomListener {
         void onScorllBootom();
     }
-
 
 
     /**
