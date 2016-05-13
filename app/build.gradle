@@ -8,18 +8,25 @@ android {
         applicationId "com.lesehome.sample"
         minSdkVersion 14
         targetSdkVersion 22
+        resConfigs "zh", "en"//去掉三方库中无用的语言
+
+//        resValue("string", "app_name", "胡萝卜")
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            minifyEnabled true
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
 
-    sourceSets{
-        main{
-            java.srcDirs = ['src/main/java','src/main/java-gen']
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/java-gen']
         }
     }
 }
