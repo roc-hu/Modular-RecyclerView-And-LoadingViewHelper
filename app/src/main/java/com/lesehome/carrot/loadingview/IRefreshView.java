@@ -37,8 +37,6 @@ public interface IRefreshView {
 
     /**
      * 刷新监听
-     *
-     * @author LuckyJayce
      */
     interface OnRefreshListener {
         void onRefresh();

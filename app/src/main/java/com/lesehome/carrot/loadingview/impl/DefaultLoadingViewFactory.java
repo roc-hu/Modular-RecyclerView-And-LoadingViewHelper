@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lesehome.carrot.loadingview.ILoadViewFactory;
-import com.lesehome.carrot.loadingview.helper.VaryViewHelper;
 
 public class DefaultLoadingViewFactory implements ILoadViewFactory {
 
